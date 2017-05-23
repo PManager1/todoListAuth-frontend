@@ -3,7 +3,9 @@ import React from 'react';
 import {
   StyleSheet,
   Text,
-  View
+  TextInput,
+  View,
+  TouchableOpacity,
 } from 'react-native';
 
 var Login = React.createClass({
@@ -12,9 +14,38 @@ var Login = React.createClass({
       <View style={styles.container}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>
-            Welcome to React Native - Login View.
+            To-Do
           </Text>
         </View>
+        <View style={styles.field}>
+            <TextInput
+              placeholder="Email"
+              style={styles.textInput}
+          />
+        </View>
+
+        <View style={styles.field}>
+            <TextInput
+              placeholder="Password"
+              style={styles.textInput}
+          />
+        </View>
+
+<View style={styles.buttonContainer}>
+    <TouchableOpacity>
+      <Text style={styles.button}> SignIn
+      </Text>
+    </TouchableOpacity>
+</View>
+
+<View style={styles.buttonContainer}>
+    <TouchableOpacity>
+      <Text style={styles.button}> SignUp
+      </Text>
+    </TouchableOpacity>
+</View>
+
+
       </View>
     );
   }
@@ -22,6 +53,16 @@ var Login = React.createClass({
 
 
 const styles = StyleSheet.create({
+  buttonContainer:{
+    padding:20,
+    flexDirection:'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  button:{
+    fontSize: 30,
+    color: 'white'
+  },
   container: {
     flex: 1,
     justifyContent: 'flex-start',
@@ -34,7 +75,18 @@ const styles = StyleSheet.create({
   },
   title:{
     color: 'white',
-    fontSize: 35,
+    fontSize: 35
+  },
+  field: {
+    borderRadius: 5,
+    padding: 5,
+    paddingLeft: 8,
+    margin: 7,
+    marginTop:0,
+    backgroundColor: 'white'
+  },
+  textInput: {
+    height: 26,
   }
 });
 
