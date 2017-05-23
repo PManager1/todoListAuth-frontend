@@ -17,23 +17,7 @@ var App =  React.createClass ({
 
   render() {
     return (
-      <View style={styles.container}>
-
-        <View style={styles.topBar}>
-          <Text style={styles.title}> Boiler App ready!
-          </Text>
-        </View>
-
-
-        <View>
-            <Text>
-              Welcome to React Native - from App.
-            </Text>
-        </View>
-
-
-
-      </View>
+    <Login />
     );
   }
 });

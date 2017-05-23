@@ -1,6 +1,7 @@
+
 import React from 'react';
 import {
-  Stylesheet,
+  StyleSheet,
   Text,
   View
 } from 'react-native';
@@ -8,12 +9,32 @@ import {
 var Login = React.createClass({
   render(){
     return(
-      <View>
-          <Text>
-            Welcome to React Native.
+      <View style={styles.container}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>
+            Welcome to React Native - Login View.
           </Text>
+        </View>
       </View>
     );
+  }
+});
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'stretch',
+    paddingTop: 20,
+    backgroundColor: '#aaa'
+  },
+  titleContainer:{
+    padding: 10,
+  },
+  title:{
+    color: 'white',
+    fontSize: 35,
   }
 });
 
