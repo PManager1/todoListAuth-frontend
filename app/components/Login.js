@@ -31,20 +31,17 @@ var Login = React.createClass({
           />
         </View>
 
-<View style={styles.buttonContainer}>
-    <TouchableOpacity>
-      <Text style={styles.button}> SignIn
-      </Text>
-    </TouchableOpacity>
-</View>
-
-<View style={styles.buttonContainer}>
-    <TouchableOpacity>
-      <Text style={styles.button}> SignUp
-      </Text>
-    </TouchableOpacity>
-</View>
-
+          <View style={styles.buttonContainer}>
+              <TouchableOpacity>
+                <Text style={styles.button}> SignIn
+                </Text>
+              </TouchableOpacity>
+        
+              <TouchableOpacity>
+                <Text style={styles.button}> SignUp
+                </Text>
+              </TouchableOpacity>
+          </View>
 
       </View>
     );
