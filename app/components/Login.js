@@ -9,9 +9,14 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+
+import { authUser } from '../actions';
+
 var Login = React.createClass({
+
   onSignIn: function () {
     var {email, password} = this.props.fields;
+    this.props.dispatch(authUser('fake id'));
     console.log(email.value, password.value);
   },
   render(){
@@ -23,7 +28,7 @@ var Login = React.createClass({
         )
       }
     }
-    
+
     return(
       <View style={styles.container}>
         <View style={styles.titleContainer}>
