@@ -13,22 +13,31 @@ import {
 
 import Login from './Login';
 import Main from './Main';
+import AlertContainer from './alerts/AlertContainer'
 
 
 var App =  React.createClass ({
 
   render() {
-    if(this.props.user_id){
-      console.log(' inside the if - Main view ');
-      return (
-      <Main />
-      );
-    } else{   // if the props.user_id doesnt exist we'll return the login view.
-      console.log(' inside the else in App.js - Login View ');
-      return (
-      <Login />
-      );
+    var renderMainView = () => {
+      if(this.props.user_id){
+        console.log(' inside the if - Main view ');
+        return (
+        <Main />
+        );
+      } else{   // if the props.user_id doesnt exist we'll return the login view.
+        console.log(' inside the else in App.js - Login View ');
+        return (
+        <Login />
+        );
+      }
     }
+    return(
+      <View style={{flex: 1}}>
+        {renderMainView()}
+        <AlertContainer/>
+      </View>
+    )
   }
 });
 

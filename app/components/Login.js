@@ -10,13 +10,13 @@ import {
 } from 'react-native';
 
 
-import { authUser } from '../actions';
+import { authUser, addAlert } from '../actions';
 
 var Login = React.createClass({
 
   onSignIn: function () {
     var {email, password} = this.props.fields;
-    this.props.dispatch(authUser('fake id'));
+    this.props.dispatch(addAlert('Hello'));
     console.log(email.value, password.value);
   },
   render(){
