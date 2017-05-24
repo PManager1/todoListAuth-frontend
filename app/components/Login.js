@@ -1,139 +1,160 @@
+
 import React from 'react';
-// its like react redux connect.
 import {reduxForm} from 'redux-form';
 import {
   StyleSheet,
   Text,
-  TextInput,
   View,
-  TouchableOpacity,
+  TextInput,
+  TouchableOpacity
 } from 'react-native';
 
-
-import { loginUser, signupUser, addAlert } from '../actions';
+import {loginUser, signupUser, addAlert} from '../actions';
 
 var Login = React.createClass({
-
-  onSignIn: function () {
-    var {dispatch, fields: {email, password}} = this.props;
-    dispatch(loginUser(email.value, password.value));
-
-    // this.props.dispatch(addAlert('Hello'));
-    // console.log(email.value, password.value);
+  getInitialState: function() {
+    return {
+      loading: false
+    }
   },
-  onSignUp: function () {
+  onSignIn: function() {
     var {dispatch, fields: {email, password}} = this.props;
-    dispatch(signupUser(email.value, password.value));
+    this.setState({
+      loading: true
+    });
+    dispatch(loginUser(email.value, password.value)).then(() => {
+      this.setState({
+        loading: false
+      });
+    });
   },
-  render(){
+  onSignUp: function() {
+    var {dispatch, fields: {email, password}} = this.props;
+    this.setState({
+      loading: true
+    });
+    dispatch(signupUser(email.value, password.value)).then(() => {
+      this.setState({
+        loading: false
+      });
+    });
+  },
+  render() {
     var {fields: {email, password}} = this.props;
+
     var renderError = (field) => {
-      if(field.touched && field.error){
-        return(
-          <Text style={styles.formError}> {field.error} </Text>
+      if (field.touched && field.error) {
+        return (
+          <Text style={styles.formError}>{field.error}</Text>
         )
       }
     }
 
-    return(
-      <View style={styles.container}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>
-            To-Do
+    if (this.state.loading) {
+      return (
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Text>
+            Loading...
           </Text>
         </View>
-        <View style={styles.field}>
+      )
+    } else {
+      return (
+        <View style={styles.container}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>
+              To-Do
+            </Text>
+          </View>
+          <View style={styles.field}>
             <TextInput
               {...email}
               placeholder="Email"
               style={styles.textInput}/>
-
             <View>
-                {renderError(email)}
-              </View>
-        </View>
-
-        <View style={styles.field}>
+              {renderError(email)}
+            </View>
+          </View>
+          <View style={styles.field}>
             <TextInput
               {...password}
               placeholder="Password"
-              style={styles.textInput}
-          />
-          <View>
-              {renderError(password)}
+              style={styles.textInput}/>
+            <View>
+            {renderError(password)}
             </View>
-        </View>
-
-
-          <View style={styles.buttonContainer}>
-              <TouchableOpacity  onPress={this.onSignIn}>
-                <Text style={styles.button}>
-                  SignIn
-                </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity  onPress={this.onSignUp}>
-                <Text style={styles.button}> SignUp
-                </Text>
-              </TouchableOpacity>
           </View>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={this.onSignIn}>
+              <Text style={styles.button}>
+                Sign In
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.onSignUp}>
+              <Text style={styles.button}>
+                Sign Up
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      );
+    }
 
-      </View>
-    );
   }
 });
 
-
 const styles = StyleSheet.create({
-  buttonContainer:{
-    padding:20,
-    flexDirection:'row',
-    justifyContent: 'space-around',
-    alignItems: 'center'
-  },
-  button:{
-    fontSize: 30,
-    color: 'white'
-  },
   container: {
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'stretch',
     paddingTop: 20,
-    backgroundColor: '#aaa'
+    backgroundColor: '#2ecc71'
   },
-  titleContainer:{
-    padding: 10,
+  titleContainer: {
+    padding: 10
   },
-  title:{
+  title: {
     color: 'white',
-    fontSize: 35
+    fontSize: 35,
+    marginTop: 20,
+    marginBottom: 20
   },
   field: {
     borderRadius: 5,
     padding: 5,
     paddingLeft: 8,
     margin: 7,
-    marginTop:0,
+    marginTop: 0,
     backgroundColor: 'white'
   },
   textInput: {
-    height: 26,
+    height: 26
   },
-  formError:{
-    color: 'red',
+  buttonContainer: {
+    padding: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  button: {
+    fontSize: 30,
+    color: 'white'
+  },
+  formError: {
+    color: 'red'
   }
 });
 
 var validate = (formProps) => {
   var errors = {};
-  if (!formProps.email){
-    errors.email="Please enter your email";
+  if (!formProps.email) {
+    errors.email = "Please enter an email.";
   }
-  if (!formProps.password){
-    errors.password="Please enter your password";
+  if (!formProps.password) {
+    errors.password = "Please enter a password.";
   }
-    return errors;
+  return errors;
 }
 
 module.exports = reduxForm({
@@ -141,19 +162,3 @@ module.exports = reduxForm({
   fields: ['email', 'password'],
   validate: validate
 }, null, null)(Login);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//

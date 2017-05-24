@@ -1,39 +1,37 @@
-import React, { Component } from 'react';
-import {connect} from 'react-redux'
-// import { Provider } from 'react-redux';
+import React from 'react';
+import {connect} from 'react-redux';
 import {
   StyleSheet,
   Text,
   View,
-  StatusBar,
-  TextInput,
-  ScrollView,
-  TouchableOpacity,
+  StatusBar
 } from 'react-native';
+
+// import {} from '../actions';
 
 import Login from './Login';
 import Main from './Main';
-import AlertContainer from './alerts/AlertContainer'
+import AlertContainer from './alerts/AlertContainer';
 
-
-var App =  React.createClass ({
-
+var App = React.createClass({
+  getInitialState() {
+    return {}
+  },
   render() {
     var renderMainView = () => {
-      if(this.props.user_id){
-        console.log(' inside the if - Main view ');
+      if (this.props.user_id) {
         return (
-        <Main />
+          <Main />
         );
-      } else{   // if the props.user_id doesnt exist we'll return the login view.
-        console.log(' inside the else in App.js - Login View ');
+      } else {
         return (
-        <Login />
+          <Login />
         );
       }
     }
-    return(
+    return (
       <View style={{flex: 1}}>
+        <StatusBar barStyle="light-content"/>
         {renderMainView()}
         <AlertContainer/>
       </View>
@@ -44,10 +42,10 @@ var App =  React.createClass ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'stretch',
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingTop: 20,
-    backgroundColor: '#aaa'
+    backgroundColor: '#ccc'
   },
 });
 
@@ -56,44 +54,5 @@ var mapStateToProps = (state) => {
     user_id: state.auth.user_id
   }
 }
+
 module.exports = connect(mapStateToProps)(App);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
