@@ -4,52 +4,33 @@ import {
   Text,
   View,
   TouchableOpacity,
+  NavigatorIOS
 } from 'react-native';
 
-import {connect} from 'react-redux';
+// import {unauthUser} from '../actions';
+// onLogout: function() {
+//   this.props.dispatch(unauthUser);
+// },
+// <TouchableOpacity onPress={this.onLogout}>
+//   <Text>
+//     Logout
+//   </Text>
+// </TouchableOpacity>
 
-import { unauthUser } from '../actions'; 
+import TodoList from './TodoList';
+
 var Main = React.createClass({
-
-  onLogout: function () {
-    this.props.dispatch(unauthUser)
-  },
-  render(){
+  render() {
     return (
-        <View style={styles.container}>
-            <Text>
-                Welcome to Main.  |  You're logged in.
-            </Text>
-
-          <TouchableOpacity onPress={this.onLogout}>
-            <Text>
-                Logout
-            </Text>
-          </TouchableOpacity>
-
-        </View>
+      <NavigatorIOS
+        initialRoute={{
+          component: TodoList,
+          title: 'Todo List',
+          navigationBarHidden: true
+        }}
+        style={{flex: 1}}/>
     );
   }
 });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
-
-module.exports = connect()(Main);
-
-
-
-
-
-
-
-
-
-
-
-//
+module.exports = Main;
