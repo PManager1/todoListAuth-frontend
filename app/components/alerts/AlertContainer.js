@@ -1,28 +1,25 @@
 import React from 'react';
 import {connect} from 'react-redux';
-
 import {
   StyleSheet,
   Text,
-  View,
+  View
 } from 'react-native';
 
 import Alert from './Alert';
 
-// import { unauthUser } from '../actions';
 var AlertContainer = React.createClass({
-
   render() {
-    return (
-      var renderAlerts = () => {
-        return this.props.alerts.map((alert) => {
-          return (
-            <Alert alert={alert} key={alert.id}/>
-          )
+    var renderAlerts = () => {
+      return this.props.alerts.map((alert) => {
+        return (
+          <Alert alert={alert} key={alert.id}/>
+        )
       });
     }
+    return (
       <View style={styles.container}>
-          {renderAlerts()}
+        {renderAlerts()}
       </View>
     );
   }
@@ -31,10 +28,10 @@ var AlertContainer = React.createClass({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     left: 0,
-    right: 0,
+    right: 0
   },
 });
 
@@ -44,16 +41,4 @@ var mapStateToProps = (state) => {
   }
 }
 
-module.exports = connect()(AlertContainer);
-
-
-
-
-
-
-
-
-
-
-
-//
+module.exports = connect(mapStateToProps)(AlertContainer);
